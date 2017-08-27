@@ -1,0 +1,15 @@
+# File created by Chef! Any local changes will be overwritten next Chef run!
+
+KUBELET_HOSTNAME="--hostname-override=<%= @advertise_ip %>"
+KUBELET_ARGS="--api-servers=https://<%= @master_fqdn %>:443 \
+              --register-schedulable=true \
+              --cni-conf-dir=/etc/kubernetes/cni/net.d \
+              --container-runtime=docker \
+              --allow-privileged=true \
+              --pod-manifest-path=/etc/kubernetes/manifests \
+              --cluster_dns=<%= @dns_ip %> \
+              --cluster_domain=cluster.local \
+              --kubeconfig=/etc/kubernetes/worker-kubeconfig.yaml \
+              --tls-cert-file=/etc/kubernetes/ssl/<%= @worker_fqdn %>-worker.pem \
+              --tls-private-key-file=/etc/kubernetes/ssl/<%= @worker_fqdn %>-worker-key.pem"
+              
